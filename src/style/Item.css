@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+
+.itemDiv {
+  height: 5vh;
+  width: 35vh;
+  text-align: center;
+  font-family: "Oswald", cursive;
+  margin-bottom: 2vh;
+  margin-left: 5vh;
+  font-size: 3vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.itemDiv span {
+  margin-left: 2vh;
+  margin-right: 2vh;
+}
+.itemDiv button {
+  margin-right: auto;
+}
+
+.gradient-border {
+  --borderWidth: 0.7vh;
+  background: #ffffff;
+  position: relative;
+  border-radius: var(--borderWidth);
+}
+.gradient-border:after {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--borderWidth));
+  left: calc(-1 * var(--borderWidth));
+  height: calc(100% + var(--borderWidth) * 2);
+  width: calc(100% + var(--borderWidth) * 2);
+  background: linear-gradient(
+    60deg,
+    #32cd32,
+    #00ff00,
+    #228b22,
+    #006400,
+    #adff2f,
+    #556b2f,
+    #00ff7f,
+    #00fa9a
+  );
+  border-radius: calc(2 * var(--borderWidth));
+  z-index: -1;
+  animation: animatedgradient 3s ease alternate infinite;
+  background-size: 300% 300%;
+}
+
+@keyframes animatedgradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
