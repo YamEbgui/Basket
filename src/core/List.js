@@ -1,7 +1,7 @@
 import React from "react";
 import Item from "./Item";
 import "../style/List.css";
-
+import deleteImage from "../images/delete.png";
 export default class List extends React.Component {
   constructor(props) {
     super(props);
@@ -53,17 +53,27 @@ export default class List extends React.Component {
       const itemsCounter = this.listOfCounters(this.props.products);
       console.log("here", itemsCounter);
       listName = "Basket";
+
       return (
         <div className="listDiv">
-          <h3>{listName}</h3>
-          {itemsCounter.map((item) => (
-            <Item
-              basket={true}
-              func={this.props.func}
-              product={item.product}
-              count={item.counter}
-            />
-          ))}
+          <div id="basketHeader">
+            <h3>{listName}</h3>
+            <button onClick={() => this.props.funcDeleteAll()}>
+              <img src={deleteImage} />
+            </button>
+          </div>
+          {itemsCounter.length !== 0 ? (
+            itemsCounter.map((item) => (
+              <Item
+                basket={true}
+                func={this.props.func}
+                product={item.product}
+                count={item.counter}
+              />
+            ))
+          ) : (
+            <h3>Empty Basket</h3>
+          )}
         </div>
       );
     } else {

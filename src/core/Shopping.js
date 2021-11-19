@@ -1,8 +1,6 @@
 import React from "react";
 import List from "./List";
 import "../style/Shopping.css";
-import { elemIndex } from "prelude-ls";
-import { remove } from "lodash";
 
 const products = [
   "Strawberry",
@@ -32,6 +30,10 @@ export default class Shopping extends React.Component {
     super(props);
     this.state = { productsInBasket: [] };
   }
+
+  deleteAllItems = () => {
+    this.setState({ productsInBasket: [] });
+  };
 
   addToBasket = (event) => {
     this.setState((prevState) => {
@@ -76,6 +78,7 @@ export default class Shopping extends React.Component {
         <List func={this.addToBasket} products={products} />
         <List
           func={this.removeProduct}
+          funcDeleteAll={this.deleteAllItems}
           basket={true}
           products={this.state.productsInBasket}
         />

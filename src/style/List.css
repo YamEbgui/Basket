@@ -4,11 +4,28 @@
   font-family: "Leckerli One", cursive;
   font-size: 4vh;
   color: rgba(23, 179, 44, 0.829);
-  text-shadow: 0 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 0.3vh rgba(0, 0, 0, 0.5);
   align-self: center;
 }
 .listDiv {
   display: flex;
   flex-direction: column;
   justify-content: start;
+}
+
+#basketHeader {
+  display: flex;
+  flex-direction: row;
+}
+
+#basketHeader button {
+  height: 4vh;
+  margin: 5vh;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+#basketHeader img {
+  height: 4vh;
 }
