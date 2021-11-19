@@ -77,7 +77,7 @@ export default class List extends React.Component {
         </div>
       );
     } else {
-      const items = this.state.productsInBasket;
+      const items = this.props.products;
       listName = "Products";
       return (
         <div className="listDiv">

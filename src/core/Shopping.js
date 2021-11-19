@@ -1,5 +1,6 @@
 import React from "react";
 import List from "./List";
+import Search from "./Search";
 import "../style/Shopping.css";
 
 const products = [
@@ -28,9 +29,42 @@ const products = [
 export default class Shopping extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { productsInBasket: [] };
+    this.state = {
+      productsInBasket: [],
+      products: [
+        "Strawberry",
+        "Blueberry",
+        "Orange",
+        "Banana",
+        "Apple",
+        "Carrot",
+        "Celery",
+        "Mushroom",
+        "Green",
+        "Pepper",
+        "Eggs",
+        "Cheese",
+        "Butter",
+        "Chicken",
+        "Beef",
+        "Pork",
+        "Fish",
+        "Rice",
+        "Pasta",
+        "Bread",
+      ],
+    };
   }
 
+  searchOnProducts = (event) => {
+    const query = event.target.value;
+    console.log(query);
+    let fillterd = [...products];
+    fillterd = fillterd.filter((product) => product.indexOf(query) != -1);
+    this.setState((prevState) => {
+      return { products: fillterd };
+    });
+  };
   deleteAllItems = () => {
     this.setState({ productsInBasket: [] });
   };
@@ -74,14 +108,17 @@ export default class Shopping extends React.Component {
   render() {
     console.log(this.state.productsInBasket);
     return (
-      <div className="shoppingDiv">
-        <List func={this.addToBasket} products={products} />
-        <List
-          func={this.removeProduct}
-          funcDeleteAll={this.deleteAllItems}
-          basket={true}
-          products={this.state.productsInBasket}
-        />
+      <div className="contentDiv">
+        <Search func={this.searchOnProducts} />
+        <div className="shoppingDiv">
+          <List func={this.addToBasket} products={this.state.products} />
+          <List
+            func={this.removeProduct}
+            funcDeleteAll={this.deleteAllItems}
+            basket={true}
+            products={this.state.productsInBasket}
+          />
+        </div>
       </div>
     );
   }
