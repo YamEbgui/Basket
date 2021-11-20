@@ -30,7 +30,7 @@ export default class Shopping extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productsInBasket: [],
+      productsInBasket: JSON.parse(this.getProductsFromLocalStorage()),
       products: [
         "Strawberry",
         "Blueberry",
@@ -56,9 +56,17 @@ export default class Shopping extends React.Component {
     };
   }
 
+  getProductsFromLocalStorage = () => {
+    try {
+      const basket = localStorage.getItem("basket");
+      return basket;
+    } catch {
+      localStorage.setItem("basket", []);
+    }
+  };
+
   searchOnProducts = (event) => {
     const query = event.target.value;
-    console.log(query);
     let fillterd = [...products];
     fillterd = fillterd.filter((product) => product.indexOf(query) != -1);
     this.setState((prevState) => {
@@ -66,6 +74,7 @@ export default class Shopping extends React.Component {
     });
   };
   deleteAllItems = () => {
+    localStorage.setItem("basket", []);
     this.setState({ productsInBasket: [] });
   };
 
@@ -73,6 +82,7 @@ export default class Shopping extends React.Component {
     this.setState((prevState) => {
       let items = [...prevState.productsInBasket];
       items.push(event.target.parentElement.textContent.substring(1));
+      localStorage.setItem("basket", JSON.stringify(items));
       return {
         productsInBasket: items,
       };
@@ -83,22 +93,19 @@ export default class Shopping extends React.Component {
     if (product === list[0]) {
       return list.slice(1);
     } else {
-      console.log(product);
-      console.log(list[0]);
       return [list[0]].concat(this.removeFromList(product, list.slice(1)));
     }
   };
   removeProduct = (event) => {
     this.setState((prevState) => {
       let items = [...prevState.productsInBasket];
-      console.log("first", items);
       items = this.removeFromList(
         event.target.parentElement.textContent
           .substring(1)
           .replace(/[0-9]/g, ""),
         items
       );
-      console.log("first", items);
+      localStorage.setItem("basket", JSON.stringify(items));
       return {
         productsInBasket: items,
       };
@@ -106,7 +113,6 @@ export default class Shopping extends React.Component {
   };
 
   render() {
-    console.log(this.state.productsInBasket);
     return (
       <div className="contentDiv">
         <Search func={this.searchOnProducts} />

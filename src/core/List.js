@@ -12,14 +12,12 @@ export default class List extends React.Component {
   }
 
   countAndReturn = (_product) => {
-    //console.log(this.state.products);
     let _counter = 0;
     for (let i = 0; i < this.props.products.length; i++) {
       if (_product === this.props.products[i]) {
         _counter++;
       }
     }
-    //console.log(_counter);
     return { product: _product, counter: _counter };
   };
 
@@ -46,12 +44,9 @@ export default class List extends React.Component {
   };
 
   render() {
-    console.log(this.props.products);
-    console.log(this.state.productsInBasket);
     let listName;
     if (this.state.basket === true) {
       const itemsCounter = this.listOfCounters(this.props.products);
-      console.log("here", itemsCounter);
       listName = "Basket";
 
       return (
